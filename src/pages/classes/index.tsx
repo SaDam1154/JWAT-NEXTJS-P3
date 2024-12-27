@@ -5,7 +5,7 @@ import axios from 'axios';
 
 interface Class {
     id: string;
-    className: string;
+    schoolClassName: string;
 }
 
 interface Props {
@@ -23,13 +23,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const params: { search?: string } = {};
         if (searchValue) params.search = searchValue;
 
-        const res = await axios.get('http://localhost:3000/api/classes', {
+        const res = await axios.get('http://localhost:3000/api/school-classes/', {
             params,
             headers: {
-                Authorization: `Bearer admin`,
+                Authorization: `Bearer adminToken`,
             },
         });
 
+        console.log('tim', '');
         return {
             props: {
                 classes: res.data,
@@ -111,7 +112,7 @@ const ClassList: React.FC<Props> = ({ classes, search, error }) => {
                                     className='hover:bg-gray-100 cursor-pointer'
                                     onClick={() => router.push(`/classes/${classItem.id}`)}
                                 >
-                                    <td className='py-2 px-4'>{classItem.className}</td>
+                                    <td className='py-2 px-4'>{classItem.schoolClassName}</td>
                                     <td className='py-2 px-4'>{classItem.id}</td>
                                 </tr>
                             ))

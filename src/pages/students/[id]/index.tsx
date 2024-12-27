@@ -8,6 +8,8 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    console.log('render student id');
+
     try {
         const res = await axios.get('http://localhost:3000/api/students');
         const students: Student[] = res.data;
@@ -35,7 +37,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     try {
         const res = await axios.get(`http://localhost:3000/api/students/${id}`, {
             headers: {
-                Authorization: `Bearer admin`,
+                Authorization: `Bearer adminToken`,
             },
         });
 
@@ -65,7 +67,7 @@ const StudentDetail: React.FC<Props> = ({ student, error }) => {
             <h1>Student Detail</h1>
             <p>ID: {student.id}</p>
             <p>Name: {student.name}</p>
-            <p>Class: {student.classId}</p>
+            <p>Class: {student.schoolClassId}</p>
         </div>
     );
 };

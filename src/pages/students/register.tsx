@@ -21,11 +21,11 @@ const RegisterStudent: React.FC = () => {
                 'http://localhost:3000/api/students',
                 {
                     name,
-                    classId,
+                    schoolClassId: classId,
                 },
                 {
                     headers: {
-                        Authorization: `Bearer admin`,
+                        Authorization: `Bearer adminToken`,
                     },
                 }
             );

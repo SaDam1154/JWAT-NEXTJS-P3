@@ -18,23 +18,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const nameValue = Array.isArray(name) ? name[0] : name;
         const classIdValue = Array.isArray(classId) ? classId[0] : classId;
 
-        let url = 'http://localhost:3000/api/students';
-        const params: { name?: string; classId?: string } = {};
+        const params: { name?: string; schoolClassId?: string } = {};
 
-        if (nameValue) {
-            url = 'http://localhost:3000/api/students/name';
-            params.name = nameValue;
-        }
+        if (nameValue) params.name = nameValue;
 
-        if (classIdValue) {
-            url = 'http://localhost:3000/api/students/class';
-            params.classId = classIdValue;
-        }
+        if (classIdValue) params.schoolClassId = classIdValue;
 
-        const res = await axios.get(url, {
+        console.log(params, 'param');
+
+        const res = await axios.get('http://localhost:3000/api/students', {
             params,
             headers: {
-                Authorization: `Bearer admin`,
+                Authorization: `Bearer adminToken`,
             },
         });
 
@@ -146,7 +141,7 @@ const StudentList: React.FC<Props> = ({ students, search, className, error }) =>
                                     onClick={() => handleRowClick(Number(student.id))}
                                 >
                                     <td className='py-2 px-4'>{student.name}</td>
-                                    <td className='py-2 px-4'>{student.classId}</td>
+                                    <td className='py-2 px-4'>{student.schoolClassId}</td>
                                 </tr>
                             ))
                         ) : (

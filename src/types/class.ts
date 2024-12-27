@@ -1,5 +1,5 @@
 export interface Class {
     id: number;
-    className: string;
+    schoolClassName: string;
     students: string[];
 }

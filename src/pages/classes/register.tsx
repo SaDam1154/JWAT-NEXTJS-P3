@@ -11,16 +11,15 @@ const RegisterClass: React.FC = () => {
 
     const handleRegister = async () => {
         try {
-            // Gọi API để đăng ký lớp học với cả id và name
             await axios.post(
-                'http://localhost:3000/api/classes',
+                'http://localhost:3000/api/school-classes',
                 {
-                    className,
+                    schoolClassName: className,
                     id: classId,
                 },
                 {
                     headers: {
-                        Authorization: `Bearer admin`,
+                        Authorization: `Bearer adminToken`,
                     },
                 }
             );

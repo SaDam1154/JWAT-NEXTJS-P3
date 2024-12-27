@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     console.log('render class id');
 
     try {
-        const res = await axios.get('http://localhost:3000/api/classes');
+        const res = await axios.get('http://localhost:3000/api/school-classes');
         const classes: Class[] = res.data;
 
         const paths = classes.map((cls) => ({
@@ -35,9 +35,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { id } = context.params!;
 
     try {
-        const res = await axios.get(`http://localhost:3000/api/classes/${id}`, {
+        const res = await axios.get(`http://localhost:3000/api/school-classes/${id}`, {
             headers: {
-                Authorization: `Bearer admin`,
+                Authorization: `Bearer adminToken`,
             },
         });
 
@@ -67,7 +67,7 @@ const ClassDetail: React.FC<Props> = ({ classProps, error }) => {
         <div>
             <h1>Class Detail</h1> {/* Thay đổi tiêu đề thành "Class Detail" */}
             <p>ID: {classProps.id}</p>
-            <p>Name: {classProps.className}</p>
+            <p>Name: {classProps.schoolClassName}</p>
         </div>
     );
 };
